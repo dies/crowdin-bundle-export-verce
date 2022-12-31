@@ -1,4 +1,12 @@
 export default async function handler(req, res) {
   const { body } = req;
-  return res.send(`Hello ${body.name}, you just parsed the request body!`);
+
+  const result = body.strings.map(s => {
+    return {
+      id: s.identifier,
+      text: s.translations[body.languageId].text
+    }
+  })
+
+  return res.send(result);
 }
